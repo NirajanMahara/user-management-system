@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1.mb-4 User List
+  .table-responsive
+    table.table.table-striped.table-hover
+      thead.table-dark
+        tr
+          th Name
+          th Email
+          th Phone
+          th City
+          th Country
+          th Actions
+      tbody
+        each user in users
+          tr
+            td #{user.lastName}, #{user.firstName}
+            td #{user.email}
+            td #{user.phoneNumber}
+            td #{user.city}
+            td #{user.country}
+            td
+              a.btn.btn-primary.btn-sm(href=`/edit/${user._id}`) Edit
+        else
+          tr
+            td(colspan='6') No users found

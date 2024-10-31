@@ -1,0 +1,40 @@
+/* Custom styles for User Management System */
+
+/* Form styling */
+.form-label {
+    font-weight: 500;
+}
+
+/* Required field indicator */
+.form-label::after {
+    content: " *";
+    color: red;
+}
+
+/* Table improvements */
+.table-responsive {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.table thead th {
+    background-color: #0d6efd;
+    color: white;
+    border-bottom: none;
+}
+
+/* Card styling */
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Footer styling */
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Responsive improvements */
+/* @media () */

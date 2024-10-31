@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  h1.mb-4 Edit User
+  .row
+    .col-md-8
+      form(method='POST' action=`/edit/${user._id}`)
+        .row
+          .col-md-6.mb-3
+            label.form-label First Name *
+            input.form-control(type='text' name='firstName' required value=user.firstName)
+          .col-md-6.mb-3
+            label.form-label Last Name *
+            input.form-control(type='text' name='lastName' required value=user.lastName)
+        
+        .mb-3
+          label.form-label Date of Birth *
+          input.form-control(type='date' name='dateOfBirth' required value=user.dateOfBirth.toISOString().split('T')[0])
+        
+        .mb-3
+          label.form-label Address Line 1 *
+          input.form-control(type='text' name='address1' required value=user.address1)
+        
+        .mb-3
+          label.form-label Address Line 2
+          input.form-control(type='text' name='address2' value=user.address2)
+        
+        .row
+          .col-md-6.mb-3
+            label.form-label City *
+            input.form-control(type='text' name='city' required value=user.city)
+          .col-md-6.mb-3
+            label.form-label Postal Code *
+            input.form-control(type='text' name='postalCode' required value=user.postalCode)
+        
+        .mb-3
+          label.form-label Country *
+          input.form-control(type='text' name='country' required value=user.country)
+        
+        .row
+          .col-md-6.mb-3
+            label.form-label Phone Number *
+            input.form-control(type='tel' name='phoneNumber' required value=user.phoneNumber)
+          .col-md-6.mb-3
+            label.form-label Email *
+            input.form-control(type='email' name='email' required value=user.email)
+        
+        .mb-3
+          label.form-label Notes
+          textarea.form-control(name='notes' rows='3')= user.notes
+        
+        .d-flex.gap-2.mb-3
+          button.btn.btn-primary(type='submit') Update User
+          a.btn.btn-secondary(href='/') Cancel
+    
+    .col-md-4
+      .card.bg-light
+        .card-body
+          h5.card-title Delete User
+          p.card-text This action cannot be undone.
+          form(method='POST' action=`/delete/${user._id}` onsubmit='return confirm("Are you sure you want to delete this user?")')
+            button.btn.btn-danger(type='submit') Delete User
