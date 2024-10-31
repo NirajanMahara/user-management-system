@@ -63,4 +63,10 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
+// Validate email uniqueness
+userSchema.path('email').validate(async function(value) {
+    const count = await this.model('User').countDocuments({ email: value, _id: { $ne: this._id } });
+    return count === 0;
+}, 'Email is already registered');
+
 module.exports = mongoose.model('User', userSchema);

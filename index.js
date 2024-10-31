@@ -6,12 +6,12 @@
  * Description: A CRUD application for managing user information
  * Technologies Used: Node.js, Express, MongoDB Atlas, PUG, and Bootstrap.
  * 
- * Features:
- * - Create, Read, Update, and Delete users
- * - Form validation
- * - Responsive design
+ * Application Features:
+ * - CRUD operations for user management
  * - MongoDB Atlas integration
- * - Error handling
+ * - Express.js backend
+ * - PUG templating
+ * - Bootstrap styling
  */
 
 // Import necessary modules
@@ -48,6 +48,15 @@ app.set('view engine', 'pug'); // Set Pug as the templating engine
 app.set('views', path.join(__dirname, 'views')); // Set the directory for view templates
 app.use(bodyParser.urlencoded({ extended: true })); // Middleware to parse URL-encoded bodies
 app.use(express.static('public')); // Serve static files from the 'public' directory
+
+// Global Error Handler Middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).render('error', { 
+        title: 'Server Error', 
+        error: 'Something went wrong!' 
+    });
+});
 
 // Routes
 
@@ -160,4 +169,11 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     // Log server start information
     console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+// Graceful Shutdown
+process.on('SIGINT', async () => {
+    await mongoose.connection.close();
+    console.log('MongoDB connection closed');
+    process.exit(0);
 });

@@ -1,0 +1,27 @@
+MongoDB Atlas Login Information
+-----------------------------
+
+Database Access Credentials:
+Username: c0921977
+Password: CjuMoI0nfbFrriZm
+
+Connection String:
+mongodb+srv://c0921977:CjuMoI0nfbFrriZm@cluster0.jesej.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+mongodb+srv://c0921977:CjuMoI0nfbFrriZm@cluster0.jesej.mongodb.net/userManagement
+
+Connection Details:
+- Cluster Name: Cluster0
+- Database Name: userManagement
+- Collection Name: users
+
+Steps to Verify:
+1. Log in to MongoDB Atlas: https://cloud.mongodb.com
+2. Use the credentials above
+3. Navigate to Cluster0
+4. Select "Collections" to view the data
+
+Notes:
+- The database user has Atlas admin privileges
+- Network access is configured for all IPs (0.0.0.0/0)
+- The application uses the "userManagement" database
+- User data is stored in the "users" collection

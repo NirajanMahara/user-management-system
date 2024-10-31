@@ -4,10 +4,11 @@
 This is a CRUD application for managing user data using Node.js, Express, Mongoose, and MongoDB.
 
 ## Features
-- Add new users
-- Edit existing user details
-- Delete users
-- View all users in a table format
+- Create, Read, Update, Delete (CRUD) User Operations
+- Responsive Design
+- Form Validation
+- Error Handling
+- MongoDB Atlas Integration
 
 ## Demo
 <img src="screenshots/1 project setup Screenshot 2024-10-31 at 1.40.31 AM.png" width="300" />
@@ -21,11 +22,33 @@ This is a CRUD application for managing user data using Node.js, Express, Mongoo
 ## Instructions
 1. Clone the repository.
 2. Install dependencies using `npm install`.
-3. Create a `.env` file with your MongoDB connection string.
-4. Run the application using `node index.js`.
+3. Configure Environment
+- Create `.env` file 
+- Add your MongoDB Atlas connection string
+- Set PORT if needed
+4. Start the Application
+```bash
+npm start
+# Or for development
+npm run dev
+```
 5. Open your browser and navigate to `http://localhost:3000`.
+
+## Submission Checklist
+- [x] Working CRUD application
+- [x] MongoDB Atlas integration
+- [x] PUG templates
+- [x] Bootstrap styling
+- [x] Error handling
+- [x] Screenshots included
+- [x] ATLAS_LOGIN.txt provided
 
 ## Usage
 - Click on "Add User" to fill in user details.
 - Once added, you can see users listed on the homepage.
 - Click "Edit" to update user details or "Delete" to remove a user.
+
+## Troubleshooting
+- Ensure MongoDB Atlas connection is correct
+- Check network access in Atlas
+- Verify `.env` configuration
