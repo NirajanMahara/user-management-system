@@ -1,23 +1,21 @@
 extends layout
 
 block content
-  h1.mb-4 Add New User
+  h1.text-center.mb-4 Add New User
   form(method='POST' action='/add' enctype="multipart/form-data")
-    .mb-3
-      label.form-label Profile Picture
-      input.form-control(
-        type='file'
-        name='profilePicture'
-        accept='image/jpeg,image/png,image/jpg'
-      )
-    
+    .mb-3.text-center
+      img.profile-picture-large(src='uploads/profiles/default-profile.png' alt='Profile Preview' id="profilePicturePreview")
+    .mb-3.text-center
+      label.form-label(for="profilePictureInput") Profile Picture
+      input.form-control(type="file" name="profilePicture" id="profilePictureInput" accept="image/jpeg,image/png,image/jpg" onchange="previewImage(event)")
+
     .row
       .col-md-6.mb-3
         label.form-label First Name *
-        input.form-control(type='text', name='firstName', required, value=user ? user.firstName : '')
+        input.form-control(type='text', name='firstName', placeholder='Enter first name', required, value=user ? user.firstName : '')
       .col-md-6.mb-3
         label.form-label Last Name *
-        input.form-control(type='text', name='lastName', required, value=user ? user.lastName : '')
+        input.form-control(type='text', name='lastName', placeholder='Enter last name', required, value=user ? user.lastName : '')
     
     .mb-3
       label.form-label Date of Birth *
@@ -25,36 +23,52 @@ block content
     
     .mb-3
       label.form-label Address Line 1 *
-      input.form-control(type='text', name='address1', required, value=user ? user.address1 : '')
+      input.form-control(type='text', name='address1', placeholder='Street address, P.O. box, etc.', required, value=user ? user.address1 : '')
     
     .mb-3
       label.form-label Address Line 2
-      input.form-control(type='text', name='address2', value=user ? user.address2 : '')
+      input.form-control(type='text', name='address2', placeholder='Apartment, suite, unit, building, floor, etc.', value=user ? user.address2 : '')
     
     .row
       .col-md-6.mb-3
         label.form-label City *
-        input.form-control(type='text', name='city', required, value=user ? user.city : '')
+        input.form-control(type='text', name='city', placeholder='City', required, value=user ? user.city : '')
       .col-md-6.mb-3
         label.form-label Postal Code *
-        input.form-control(type='text', name='postalCode', required, value=user ? user.postalCode : '')
+        input.form-control(type='text', name='postalCode', placeholder='Postal Code', required, value=user ? user.postalCode : '')
     
     .mb-3
       label.form-label Country *
-      input.form-control(type='text', name='country', required, value=user ? user.country : '')
+      input.form-control(type='text', name='country', placeholder='Country', required, value=user ? user.country : '')
     
     .row
       .col-md-6.mb-3
         label.form-label Phone Number *
-        input.form-control(type='tel', name='phoneNumber', required, value=user ? user.phoneNumber : '')
+        input.form-control(type='tel', name='phoneNumber', placeholder='Phone number', required, value=user ? user.phoneNumber : '')
       .col-md-6.mb-3
         label.form-label Email *
-        input.form-control(type='email', name='email', required, value=user ? user.email : '')
+        input.form-control(type='email', name='email', placeholder='Email', required, value=user ? user.email : '')
     
     .mb-3
       label.form-label Notes
-      textarea.form-control(name='notes', rows='3')= user ? user.notes : ''
+      textarea.form-control(name='notes', rows='3', placeholder='Any additional notes or comments')= user ? user.notes : ''
     
-    .mb-3
+    .d-flex.gap-2.mb-3
       button.btn.btn-primary(type='submit') Add User
-      a.btn.btn-secondary.ms-2(href='/') Cancel 
+      a.btn.btn-secondary.ms-2(href='/') Cancel
+
+  // JavaScript for image preview
+  script.
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const preview = document.getElementById('profilePicturePreview');
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        preview.src = e.target.result;  // Set the preview image source to the selected file
+      };
+      
+      if (file) {
+        reader.readAsDataURL(file);  // Read the file as a DataURL
+      }
+    }

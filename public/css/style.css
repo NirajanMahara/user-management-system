@@ -1,55 +1,150 @@
-/* Custom styles for User Management System */
-
-/* Form styling */
-.form-label {
-    font-weight: 500;
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
 }
 
-/* Required field indicator */
-.form-label::after {
-    content: " *";
-    color: red;
+/* Navbar */
+.navbar {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Table improvements */
-.table-responsive {
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+/* Header */
+h1 {
+  font-weight: bold;
+  color: #0d6efd;
 }
 
-.table thead th {
-    background-color: #0d6efd;
-    color: white;
-    border-bottom: none;
+.container {
+  max-width: 900px;
 }
 
-/* Card styling */
-.card {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Footer styling */
-.footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: auto;
-}
-
-/* Add some CSS in public/css/style.css */
+/* Profile Picture Styles */
 .profile-picture {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
 }
 
 .profile-picture-large {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #0d6efd;
+  margin-bottom: 15px;
 }
 
-/* Responsive improvements */
-/* @media () */
+/* Form Styles */
+form label.form-label {
+  font-weight: 600;
+  color: #495057;
+}
+
+form .form-control {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s ease-in-out;
+}
+
+form .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: none;
+}
+
+/* Buttons */
+.btn {
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+/* Table Styles */
+.table {
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 0.75rem;
+}
+
+.table th {
+  background-color: #f1f1f1;
+  color: #495057;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Delete Confirmation */
+.card.border-danger {
+  border: 1px solid #dc3545;
+}
+
+.card-title.text-danger {
+  font-weight: 700;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Footer */
+footer.footer {
+  font-size: 0.875rem;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  padding-top: 15px;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Media Queries */
+@media (max-width: 576px) {
+  .btn-group .btn {
+    font-size: 0.875rem;
+  }
+
+  .profile-picture-large {
+    width: 100px;
+    height: 100px;
+  }
+
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}
