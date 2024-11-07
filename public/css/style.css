@@ -36,5 +36,20 @@
     margin-top: auto;
 }
 
+/* Add some CSS in public/css/style.css */
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-picture-large {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 /* Responsive improvements */
 /* @media () */

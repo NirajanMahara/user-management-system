@@ -6,6 +6,7 @@ block content
     table.table.table-striped.table-hover
       thead.table-dark
         tr
+          th Profile
           th Name
           th Email
           th Phone
@@ -15,6 +16,12 @@ block content
       tbody
         each user in users
           tr
+            td
+              img.rounded-circle(
+                src=user.profilePicture ? `/uploads/profiles/${user.profilePicture}` : '/images/default-profile.png'
+                alt=`${user.firstName} ${user.lastName}`
+                style='width: 50px; height: 50px; object-fit: cover;'
+              )
             td #{user.lastName}, #{user.firstName}
             td #{user.email}
             td #{user.phoneNumber}

@@ -4,7 +4,21 @@ block content
   h1.mb-4 Edit User
   .row
     .col-md-8
-      form(method='POST' action=`/edit/${user._id}`)
+      form(method='POST' action=`/edit/${user._id}` enctype="multipart/form-data")
+        .mb-3
+          label.form-label Profile Picture
+          .d-flex.align-items-center.gap-3
+            img.rounded-circle(
+              src=user.profilePicture ? `/uploads/profiles/${user.profilePicture}` : '/images/default-profile.png'
+              alt=`${user.firstName} ${user.lastName}`
+              style='width: 100px; height: 100px; object-fit: cover;'
+            )
+            input.form-control(
+              type='file'
+              name='profilePicture'
+              accept='image/jpeg,image/png,image/jpg'
+            )
+            
         .row
           .col-md-6.mb-3
             label.form-label First Name *

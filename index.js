@@ -19,11 +19,50 @@ const express = require('express'); // Framework for building web applications
 const mongoose = require('mongoose'); // MongoDB object modeling tool
 const bodyParser = require('body-parser'); // Middleware for parsing request bodies
 const path = require('path'); // Module for handling file paths
+const multer = require('multer');
+
 // Load environment variables from .env file
 require('dotenv').config();
 
 // Import User Model for interacting with user data in MongoDB
 const User = require('./models/user');
+
+// Configure multer to save files on disk with specific settings
+const storage = multer.diskStorage({
+    // Set the destination folder for uploads
+    destination: function(req, file, cb) {
+        cb(null, 'public/uploads/profiles'); // Save in "public/uploads/profiles" directory
+    },
+    // Customize the filename for each uploaded file
+    filename: function(req, file, cb) {
+        // Generate a unique filename with a timestamp and random number to avoid collisions
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        // Use the original file extension and prefix the file with "profile-"
+        cb(null, 'profile-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+// Initialize multer with the configured storage and file limits
+const upload = multer({
+    storage: storage, // Use the custom storage defined above
+    limits: {
+        fileSize: 5 * 1024 * 1024 // Limit file size to 5 MB
+    },
+    // Define a filter function to allow only certain file types
+    fileFilter: function(req, file, cb) {
+        // Define allowed file types with regular expression
+        const filetypes = /jpeg|jpg|png/;
+        // Check if the file's MIME type and extension match the allowed types
+        const mimetype = filetypes.test(file.mimetype);
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+        
+        // Allow the file if both the MIME type and extension are valid
+        if (mimetype && extname) {
+            return cb(null, true);
+        }
+        // Reject the file if it is not a valid type
+        cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+    }
+});
 
 // Initialize Express application
 const app = express();
@@ -85,11 +124,15 @@ app.get('/add', (req, res) => {
     res.render('add', { title: 'Add New User' });
 });
 
-// POST: Create new user
-app.post('/add', async (req, res) => {
+// POST: Create new user // Modify the POST routes to handle file upload
+app.post('/add', upload.single('profilePicture'), async (req, res) => {
     try {
+        const userData = req.body;
+        if (req.file) {
+            userData.profilePicture = req.file.filename;
+        }
         // Create a new user instance with the request body
-        const user = new User(req.body);
+        const user = new User(userData);
         // Save the new user to the database
         await user.save();
         // Redirect to the home page after successful addition
@@ -131,10 +174,14 @@ app.get('/edit/:id', async (req, res) => {
 });
 
 // POST: Update user
-app.post('/edit/:id', async (req, res) => {
+app.post('/edit/:id', upload.single('profilePicture'), async (req, res) => {
     try {
+        const userData = req.body;
+        if (req.file) {
+            userData.profilePicture = req.file.filename;
+        }
         // Update the user with the provided ID using request body
-        await User.findByIdAndUpdate(req.params.id, req.body);
+        await User.findByIdAndUpdate(req.params.id, userData);
         // Redirect to the home page after successful update
         res.redirect('/');
     } catch (err) {
@@ -162,6 +209,19 @@ app.post('/delete/:id', async (req, res) => {
             error: 'Failed to delete user'
         });
     }
+});
+
+// test route to verify file upload restrictions
+app.get('/test-upload', (req, res) => {
+    res.send(`
+        <form action="/test-upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="profilePicture">
+            <button type="submit">Upload</button>
+        </form>
+    `);
+});
+app.post('/test-upload', upload.single('profilePicture'), (req, res) => {
+    res.send('Upload successful: ' + req.file.filename);
 });
 
 // Start the server and listen on the specified PORT
