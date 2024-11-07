@@ -2,7 +2,15 @@ extends layout
 
 block content
   h1.mb-4 Add New User
-  form(method='POST' action='/add')
+  form(method='POST' action='/add' enctype="multipart/form-data")
+    .mb-3
+      label.form-label Profile Picture
+      input.form-control(
+        type='file'
+        name='profilePicture'
+        accept='image/jpeg,image/png,image/jpg'
+      )
+    
     .row
       .col-md-6.mb-3
         label.form-label First Name *

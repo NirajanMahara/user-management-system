@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Last name is required'],
         trim: true
     },
+    profilePicture: {
+        type: String, // Store the file path of the image
+        default: 'default-profile.png' // Default image in case no picture is uploaded
+    },
     dateOfBirth: {
         type: Date,
         required: [true, 'Date of birth is required']
