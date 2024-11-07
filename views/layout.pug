@@ -3,28 +3,33 @@ html(lang='en')
   head
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    title #{title} - User Management
-    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet')
+    title #{title} - User Management System    
+    // Add Font Awesome CDN
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css')
+    // Link to Bootstrap CSS
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet')
     link(href='/css/style.css' rel='stylesheet')
     
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
       .container
-        a.navbar-brand(href='/') User Management
+        a.navbar-brand(href='/') User Management System
         button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav')
           span.navbar-toggler-icon
         #navbarNav.collapse.navbar-collapse
-          ul.navbar-nav
-            li.nav-item: a.nav-link(href='/') View Users
-            li.nav-item: a.nav-link(href='/add') Add User
+          ul.navbar-nav.ms-auto
+            li.nav-item
+              a.nav-link(href='/') View Users
+            li.nav-item
+              a.nav-link(href='/add') Add User
 
-    .container.mt-4
+    .container.mt-5
       if error
-        .alert.alert-danger= error
+        .alert.alert-danger.text-center.mb-4 #{error}
       block content
 
-    footer.footer.mt-5.py-3.bg-light
-      .container.text-center
-        span.text-muted User Management System - Created by Nirajan Mahara
+    footer.footer.mt-5.py-3.bg-light.text-center
+      .container.text-muted
+        span User Management System © #{new Date().getFullYear()} - Created by Nirajan Mahara
 
-    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js')
